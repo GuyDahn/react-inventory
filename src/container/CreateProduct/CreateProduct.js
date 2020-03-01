@@ -5,9 +5,8 @@ import axios from 'axios'
 
 import {
     FormGroup,
-    ControlLabel,
+    FormText,
     FormControl,
-    HelpBlock,
     Button,
     Col
 } from 'react-bootstrap'
@@ -47,9 +46,9 @@ class CreateProduct extends Component {
         function FieldGroup({ id, label, help, ...props }) {
             return (
                 <FormGroup controlId={id}>
-                    <ControlLabel>{label}</ControlLabel>
+                    <FormText>{label}</FormText>
                     <FormControl {...props} onChange={props.change} />
-                    {help && <HelpBlock>{help}</HelpBlock>}
+                    {help && <div>{help}</div>}
                 </FormGroup>
             )
         }
@@ -59,7 +58,7 @@ class CreateProduct extends Component {
             <Col md={8}>
                 <form>
                     <FormGroup controlId="formControlSelect">
-                        <ControlLabel>Product Category</ControlLabel>
+                        <FormText>Product Category</FormText>
                         <FormControl componentClass="select">
                             <option value="Winter Gear">Select Category</option>
                             <option value="Winter Gear">Winter Gear</option>
@@ -75,7 +74,7 @@ class CreateProduct extends Component {
                     <FieldGroup id="formControlsFile" type="file" label="Product Image" />
 
                     <FormGroup controlId="formControlsTextarea">
-                        <ControlLabel>Product Description</ControlLabel>
+                        <FormText>Product Description</FormText>
                         <FormControl componentClass="textarea" inputRef={(ref) => { this.description = ref }} />
                     </FormGroup>
 

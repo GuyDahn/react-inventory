@@ -5,9 +5,6 @@ import { ButtonToolbar } from 'react-bootstrap/lib/'
 import * as actionTypes from '../../store/actions/actions'
 // import axios from 'axios'
 
-
-
-
 class ProductButtons extends Component {
 
     state = {

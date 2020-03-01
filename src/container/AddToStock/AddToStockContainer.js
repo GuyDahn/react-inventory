@@ -10,7 +10,7 @@ class AddToStockButtons extends Component {
     }
 
     addToCart = (product) => {
-        let newAtt = this.state.cart.concat(product)
+        let newArr = this.state.cart.concat(product)
         this.setState({ cart: newArr })
         console.log(this.state.cart)
     }

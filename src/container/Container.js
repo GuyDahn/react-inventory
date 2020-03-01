@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import { Button, ButtonToolbar } from 'react-bootstrap/lib/'
 // import * as actionTypes from '../store/actions/actions'
 import LoginContainer from './LoginContainer/LoginContainer'
-import CreateAccountContainer from './CreateAccountContainer/CreateAccountContainer'
-import SellProductButtons from './SellProductsContainer/SellProductsContainer'
-import AddToStockButtons from './AddToStockContainer/AddToStockContainer'
+import CreateAccountContainer from './CreateAccount/CreateAccountContainer'
+import SellProductButtons from './SellProduct/SellProductsContainer'
+import AddToStockButtons from './AddToStock/AddToStockContainer'
 import Inventory from './Inventory/Inventory'
 import CreateProduct from './CreateProduct/CreateProduct'
 
@@ -53,8 +53,6 @@ class Container extends Component {
             showCreateProduct: true
         })
     }
-
-
 
     render() {
         return (
