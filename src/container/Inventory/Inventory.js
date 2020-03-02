@@ -6,12 +6,14 @@ import {
     Button, 
     ButtonToolbar, 
     Modal, 
-    FormGroup,   
+    FormGroup, 
+    ControlLabel, 
+    HelpBlock, 
     FormControl 
-} from "react-bootstrap"
+} from "react-bootstrap/lib/"
 import axios from 'axios'
 import * as actionTypes from '../../store/actions'
-import MdRefresh from 'react-icons/md/index'
+import Refresh from 'react-icons/lib/md/autorenew'
 
 
 
@@ -87,7 +89,7 @@ class Inventory extends Component {
             })
     }
 
-    MdRefreshProducts = () => {
+    refreshProducts = () => {
         this.setState({
             showMensCategory: false,
             showWomensCategory: false,
@@ -158,9 +160,9 @@ class Inventory extends Component {
         function FieldGroup({ id, label, help, ...props }) {
             return (
                 <FormGroup controlId={id}>
-                    <div>{label}</div>
+                    <ControlLabel>{label}</ControlLabel>
                     <FormControl {...props} onChange={props.change} />
-                    {help && <div>{help}</div>}
+                    {help && <HelpBlock>{help}</HelpBlock>}
                 </FormGroup>
             )
         }
@@ -194,7 +196,7 @@ class Inventory extends Component {
         return (
             <div className="container"style={{ margin: 10 }}>
                 <ButtonToolbar style={{ justifyContent: "center", display: "flex" }}>
-                    <Button onClick={this.MdRefreshProducts}><MdRefresh /> Show All</Button>
+                    <Button onClick={this.refreshProducts}><Refresh /> Show All</Button>
                     <Button onClick={this.showMensCategory}>Men</Button>
                     <Button onClick={this.showWomensCategory}>Women</Button>
                     <Button onClick={this.showKidsCategory}>Kids</Button>
@@ -270,7 +272,7 @@ class Inventory extends Component {
                                 <Modal.Body style={{ textAlign: 'left' }}>
                                     <form>
                                         <FormGroup controlId="formControlsSelect">
-                                            <div>Product Category</div>
+                                            <ControlLabel>Product Category</ControlLabel>
                                             <FormControl componentClass="select">
                                                 <option value="select">Select a Category</option>
                                                 <option value="">Men's</option>
@@ -309,7 +311,7 @@ class Inventory extends Component {
                                         <FieldGroup id="formControlsFile" type="file" label="Product Image" />
 
                                         <FormGroup controlId="formControlsTextarea">
-                                            <div>Product Description</div>
+                                            <ControlLabel>Product Description</ControlLabel>
                                             <FormControl componentClass="textarea" placeholder={this.state.preEditDescription} inputRef={(ref) => { this.description = ref }} />
                                         </FormGroup>
                                     </form>

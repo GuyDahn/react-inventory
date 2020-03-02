@@ -1,42 +1,24 @@
 {
-  "name": "react-components",
+  "name": "redux-inventory",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@reduxjs/toolkit": "^1.2.5",
-    "axios": "^0.19.2",
-    "bluebird": "^3.5.1",
-    "chart.js": "^2.9.3",
-    "react": "^16.4.1",
-    "react-bootstrap": "^1.0.0-beta.17",
-    "react-chartjs-2": "^2.9.0",
-    "react-dom": "^16.4.1",
-    "react-icons": "^3.9.0",
-    "react-redux": "^7.2.0",
-    "react-router-dom": "^4.3.1",
-    "react-scripts": "1.1.4",
-    "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0"
-  },
-  "devDependencies": {
-    "babel-plugin-emotion": "^10.0.9",
-    "babel-plugin-react-html-attrs": "^2.1.0",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "enzyme": "^3.3.0",
-    "enzyme-adapter-react-16": "^1.1.1",
-    "jest": "^23.4.2",
-    "jest-emotion": "^10.0.10",
-    "jest-expect-message": "github:Elevationacademy/jest-expect-message",
-    "jest-transform-stub": "^1.0.0",
-    "react-test-renderer": "^16.4.2"
+    "axios": "^0.17.1",
+    "chart.js": "^2.7.1",
+    "react": "^16.2.0",
+    "react-bootstrap": "^0.31.5",
+    "react-chartjs-2": "^2.6.4",
+    "react-dom": "^16.2.0",
+    "react-icons": "^2.2.7",
+    "react-redux": "^5.0.6",
+    "react-scripts": "1.0.17",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "test-silent": "jest || exit 0",
-    "eject": "react-scripts eject",
-    "tests": "tests",
-    "update": "update"
+    "eject": "react-scripts eject"
   }
 }

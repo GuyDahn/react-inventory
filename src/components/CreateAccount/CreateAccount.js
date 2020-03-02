@@ -1,19 +1,21 @@
 import React from 'react'
 import {
     FormGroup,
+    ControlLabel,
     FormControl,
+    HelpBlock,
     Button,
     Col
-} from "react-bootstrap"
+} from "react-bootstrap/lib/"
 
 const createAccount = (props) => {
 
     function FieldGroup({ id, label, help, ...props }) {
         return (
             <FormGroup controlId={id}>
-                <div>{label}</div>
+                <ControlLabel>{label}</ControlLabel>
                 <FormControl {...props} onChange={props.change} />
-                {help && <div>{help}</div>}
+                {help && <HelpBlock>{help}</HelpBlock>}
             </FormGroup>
         )
     }

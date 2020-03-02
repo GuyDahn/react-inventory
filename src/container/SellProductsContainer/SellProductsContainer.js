@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ProductButton from '../../components/SellProducts/SellProductButtons'
-import { ButtonToolbar, Button } from 'react-bootstrap'
+import { ButtonToolbar, Button } from 'react-bootstrap/lib/'
 import * as actionTypes from '../../store/actions'
 import Refresh from 'react-icons/lib/md/autorenew'
 import axios from 'axios';

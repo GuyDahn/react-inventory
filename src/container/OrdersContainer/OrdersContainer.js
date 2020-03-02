@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 // import * as actionTypes from '../../store/actions'
-import { Table, Button, Col, Modal } from "react-bootstrap"
+import { Table, Button, Col, Modal } from "react-bootstrap/lib/"
 import axios from 'axios'
 
 class Orders extends Component {

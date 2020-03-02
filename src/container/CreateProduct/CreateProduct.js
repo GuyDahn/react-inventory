@@ -4,10 +4,12 @@ import * as actionTypes from '../../store/actions'
 import axios from 'axios'
 import {
     FormGroup,
+    ControlLabel,
     FormControl,
+    HelpBlock,
     Button,
     Col
-} from "react-bootstrap"
+} from "react-bootstrap/lib/"
 
 class CreateProduct extends Component {
 
@@ -61,9 +63,9 @@ class CreateProduct extends Component {
         function FieldGroup({ id, label, help, ...props }) {
             return (
                 <FormGroup controlId={id}>
-                    <div>{label}</div>
+                    <ControlLabel>{label}</ControlLabel>
                     <FormControl {...props} onChange={props.change} />
-                    {help && <div>{help}</div>}
+                    {help && <HelpBlock>{help}</HelpBlock>}
                 </FormGroup>
             )
         }
@@ -75,7 +77,7 @@ class CreateProduct extends Component {
             {this.state.show ?
                     <form>
                         <FormGroup controlId="formControlsSelect">
-                            <div>Product Category</div>
+                            <ControlLabel>Product Category</ControlLabel>
                             <FormControl componentClass="select" onChange={this.handleSelectChange} inputRef={(ref) => { this.category_id = ref}}>
                                 <option value="select">Select a Category</option>
                                 <option value="">Men's</option>
@@ -114,7 +116,7 @@ class CreateProduct extends Component {
                         <FieldGroup id="formControlsFile" type="file" label="Product Image" />
 
                         <FormGroup controlId="formControlsTextarea">
-                            <div>Product Description</div>
+                            <ControlLabel>Product Description</ControlLabel>
                             <FormControl componentClass="textarea" inputRef={(ref) => { this.description = ref }} />
                         </FormGroup>
 

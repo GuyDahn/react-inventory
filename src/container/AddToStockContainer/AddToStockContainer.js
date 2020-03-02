@@ -6,11 +6,13 @@ import {
     Modal, 
     Button, 
     FormGroup, 
+    ControlLabel, 
+    HelpBlock,
     FormControl
- } from 'react-bootstrap'
+ } from 'react-bootstrap/lib/'
 import * as actionTypes from '../../store/actions'
 import axios from 'axios'
-import MdRefresh from 'react-icons/md/index'
+import Refresh from 'react-icons/lib/md/autorenew'
 
 class AddToStockButtons extends Component {
 
@@ -137,9 +139,9 @@ class AddToStockButtons extends Component {
         function FieldGroup({ id, label, help, ...props }) {
             return (
                 <FormGroup controlId={id}>
-                    <div>{label}</div>
+                    <ControlLabel>{label}</ControlLabel>
                     <FormControl {...props} onChange={props.change} />
-                    {help && <div>{help}</div>}
+                    {help && <HelpBlock>{help}</HelpBlock>}
                 </FormGroup>
             );
         }
@@ -147,7 +149,7 @@ class AddToStockButtons extends Component {
         return (
             <div className='container' style={{ margin: 10 }} >
                 <ButtonToolbar style={{ justifyContent: "center", display: "flex" }}>
-                    <Button onClick={this.showAllProducts}><MdRefresh /> Show All</Button>
+                    <Button onClick={this.showAllProducts}><Refresh /> Show All</Button>
                     <Button onClick={this.showMensCategory}>Men</Button>
                     <Button onClick={this.showWomensCategory}>Women</Button>
                     <Button onClick={this.showKidsCategory}>Kids</Button>
