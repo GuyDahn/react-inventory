@@ -9,27 +9,16 @@ import './index.css'
 import App from './App'
 import registerServiceWorker from './registerServiceWorker'
 
-// const logger = store => {
-//     return next => {
-//         return action => {
-//             console.log('[Middleware] Dispatching', action)
-//             const result = next(action)
-//             console.log('[Middleware] next state', store.getState())
-//             return result
-//         }
-//     }
-// }
-
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 const rootReducer = combineReducers({
-  auth: authReducer,
-  main: mainReducer
+    auth: authReducer,
+    main: mainReducer
 })
 
 const store = createStore(
-  rootReducer,
-  composeEnhancers(applyMiddleware(thunk))
+    rootReducer,
+    composeEnhancers(applyMiddleware(thunk))
 )
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'))

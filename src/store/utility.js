@@ -3,6 +3,6 @@ const updateObject = (oldObject, updatedValues) => {
         ...oldObject,
         ...updatedValues
     }
-}
+};
 
-export default updateObject
+export default updateObject;
