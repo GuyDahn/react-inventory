@@ -13,11 +13,7 @@ import {
 
 class CreateProduct extends Component {
     state = {
-        product_name: " ",
-        description: " ",
-        price: " ",
-        quantity: " ",
-        category_id: " "
+        show: true
     }
 
     addToDB = (product_name, description, price, quantity) => {
@@ -30,7 +26,6 @@ class CreateProduct extends Component {
             quantity: quantity,
             photo: "photo"
         }
-
         axios({
             method: 'post',
             url: 'http://localhost:5000/products',
@@ -39,7 +34,20 @@ class CreateProduct extends Component {
         })
             .then((res) => {
                 console.log(res)
+                axios({
+                    method: 'get',
+                    url: 'hrrp://localhost:5000/products/',
+                    headers: { 'Authorization': this.props.token }
+                })
             })
+            .then((res) => {
+                console.log(res.data)
+                this.props.updateProducts(response.data)
+            })
+    }
+
+    hideCreateProduct = () => {
+        this.setState({ show: false })
     }
 
     render() {
@@ -56,43 +64,36 @@ class CreateProduct extends Component {
         return <div className="container" style={{ textAlign: "left" }}>
             <Col md={2} />
             <Col md={8}>
-                <form>
-                    <FormGroup controlId="formControlSelect">
-                        <FormText>Product Category</FormText>
-                        <FormControl componentClass="select">
-                            <option value="Winter Gear">Select Category</option>
-                            <option value="Winter Gear">Winter Gear</option>
-                            <option value="Hats">Hats</option>
-                            <option value="Bags">Bags</option>
-                            <option value="Stickers">Stickers</option>
-                        </FormControl>
-                    </FormGroup>
-                    {/* <input type="text" onChange={this.getProductName} /> */}
-                    <FieldGroup id="formControlsText" type="text" label="Product Name" inputRef={(ref) => { this.product_name = ref }} />
-                    <FieldGroup id="formControlsPrice" type="text" label="Price" inputRef={(ref) => { this.price = ref }} />
-                    <FieldGroup id="formControlsPrice" type="text" label="Quantity" inputRef={(ref) => { this.quantity = ref }} />
-                    <FieldGroup id="formControlsFile" type="file" label="Product Image" />
+                {this.state.show ?
+                    <form>
+                        <FormGroup controlId="formControlSelect">
+                            <FormText>Product Category</FormText>
+                            <FormControl componentClass="select">
+                                <option value="Winter Gear">Select Category</option>
+                                <option value="Winter Gear">Winter Gear</option>
+                                <option value="Hats">Hats</option>
+                                <option value="Bags">Bags</option>
+                                <option value="Stickers">Stickers</option>
+                            </FormControl>
+                        </FormGroup>
+                        <FieldGroup id="formControlsText" type="text" label="Product Name" inputRef={(ref) => { this.product_name = ref }} />
+                        <FieldGroup id="formControlsPrice" type="text" label="Price" inputRef={(ref) => { this.price = ref }} />
+                        <FieldGroup id="formControlsPrice" type="text" label="Quantity" inputRef={(ref) => { this.quantity = ref }} />
+                        <FieldGroup id="formControlsFile" type="file" label="Product Image" />
 
-                    <FormGroup controlId="formControlsTextarea">
-                        <FormText>Product Description</FormText>
-                        <FormControl componentClass="textarea" inputRef={(ref) => { this.description = ref }} />
-                    </FormGroup>
+                        <FormGroup controlId="formControlsTextarea">
+                            <FormText>Product Description</FormText>
+                            <FormControl componentClass="textarea" inputRef={(ref) => { this.description = ref }} />
+                        </FormGroup>
 
-                    <Button type="button" bsStyle="success" onClick={() => {
-                        let productObj = {
-                            product_id: this.props.products.length + 1,
-                            category_id: 31,
-                            product_name: this.product_name.value,
-                            description: this.description.value,
-                            price: this.price.value,
-                            quantity: this.quantity.value,
-                        }
-                        this.addToDB(this.product_name.value, this.description.value, this.price.value, this.quantity.value);
-                        // this.props.updateProducts(productObj);
-                    }}>
-                        Create Product
+                        <Button type="button" bsStyle="success" onClick={() => {
+                            this.addToDB(this.product_name.value, this.description.value, this.price.value, this.quantity.value);
+                            this.hideCreateProduct()
+                        }}>
+                            Create Product
             </Button>
-                </form>
+                    </form>
+                    : null}
                 <br />
                 <br />
             </Col>
@@ -109,7 +110,7 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
     return {
-        updateProducts: (product) => dispatch(actionTypes.updateProducts(product))
+        updateProducts: (products) => dispatch(actionTypes.updateProducts(products))
     }
 }
 
