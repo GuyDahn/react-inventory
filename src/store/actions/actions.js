@@ -14,7 +14,7 @@ export const AUTH_LOGOUT = 'AUTH_LOGOUT'
 export const LOAD_PRODUCTS = 'LOAD_PRODUCTS'
 export const ADD_TO_CART = 'ADD_TO_CART'
 
-export const UPDATE_PRODUCTS = 'UPDATE_PRODUCTS'
+export const REMOVE_FROM_CART = 'REMOVE_FROM_CART'
 
 
 export const showLogin = () => {
@@ -87,10 +87,28 @@ export const addToCart = (product) => {
     }
 }
 
-export const updateProducts = (product) => {
+export const updateProducts = (product_name, description, price, quantity) => {
     return {
         type: UPDATE_PRODUCTS,
-        product: product
+        product_name: product_name,
+        description: description,
+        price: price,
+        quantity: quantity
+    }
+}
+
+export const deleteProduct = (productID, index) => {
+    return {
+        type: DELETE_PRODUCT,
+        index: index,
+        productID: productID
+    }
+}
+
+export const removeFromCart = (index) => {
+    return {
+        type: REMOVE_FROM_CART,
+        index: index
     }
 }
 
