@@ -67,7 +67,6 @@ class Navigation extends Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-
                                         {this.props.cart.map((item, index) => {
                                             return <tr key={index}>
                                                 <td>{index + 1}</td>
