@@ -7,10 +7,8 @@ import {
     ButtonToolbar,
     Modal,
     FormGroup,
-    ControlLabel,
-    HelpBlock,
     FormControl
-} from "react-bootstrap/lib/"
+} from "react-bootstrap"
 import axios from 'axios'
 import * as actionTypes from '../../store/actions/actions'
 
@@ -35,6 +33,7 @@ class Inventory extends Component {
     updateProduct = (product_name, description, price, quantity) => {
         console.log("Current Product ID: " + this.state.productToUpdate)
         console.log(product_name, description, price, quantity)
+
         let updatedProduct = {
             category_id: 15,
             product_name: product_name,
@@ -43,6 +42,8 @@ class Inventory extends Component {
             quantity: quantity,
             photo: "photo"
         }
+
+        console.log("updatedProduct: " + updatedProduct)
 
         axios({
             method: 'patch',
@@ -59,7 +60,9 @@ class Inventory extends Component {
                 })
                     .then((response) => {
                         console.log(response.data)
-                        // this.props.updateProducts(response.data)
+                        let newProductsArr = response.data
+                        this.props.updateProduct(newProductsArr)
+                        this.setState({ showModal: false })
                     })
             })
     }
@@ -69,9 +72,9 @@ class Inventory extends Component {
         function FieldGroup({ id, label, help, ...props }) {
             return (
                 <FormGroup controlId={id}>
-                    <ControlLabel>{label}</ControlLabel>
+                    <div>{label}</div>
                     <FormControl {...props} onChange={props.change} />
-                    {help && <HelpBlock>{help}</HelpBlock>}
+                    {help && <div>{help}</div>}
                 </FormGroup>
             )
         }
@@ -137,7 +140,7 @@ class Inventory extends Component {
                             <Modal.Body style={{ textAlign: 'left' }}>
                                 <form>
                                     <FormGroup controlId="formControlsSelect">
-                                        <ControlLabel>Product Category</ControlLabel>
+                                        <div>Product Category</div>
                                         <FormControl componentClass="select">
                                             <option value="Winter Gear">Select a Category</option>
                                             <option value="Winter Gear">Winter Gear</option>
@@ -152,13 +155,13 @@ class Inventory extends Component {
                                     <FieldGroup id="formControlsFile" type="file" label="Product Image" />
 
                                     <FormGroup controlId="formControlsTextarea">
-                                        <ControlLabel>Product Description</ControlLabel>
+                                        <div>Product Description</div>
                                         <FormControl componentClass="textarea" placeholder={this.state.preEditDescription} inputRef={(ref) => { this.description = ref }} />
                                     </FormGroup>
                                 </form>
                             </Modal.Body>
                             <Modal.Footer>
-                                <Button onClick={() => this.setState({ showModal: false })}>Close</Button>
+                                <Button onClick={() => this.setState({ showModal: false })}>Cancel</Button>
                                 <Button type="button" bsStyle="success" onClick={() => this.updateProduct(this.product_name.value, this.description.value, this.price.value, this.quantity.value)}>Update Product</Button>
                             </Modal.Footer>
                         </Modal.Dialog>
@@ -179,7 +182,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onDeleteProduct: (productID, index) => dispatch(actionTypes.deleteProduct(productID, index))
+        onDeleteProduct: (productID, index) => dispatch(actionTypes.deleteProduct(productID, index)),
+        updateProduct: (products) => dispatch(actionTypes.editProduct(products))
     }
 }
 

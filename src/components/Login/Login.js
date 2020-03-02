@@ -1,21 +1,20 @@
 import React from 'react'
 import {
     FormGroup,
-    ControlLabel,
-    FormControl,
-    HelpBlock,
+    ListGroup,
+    Tab,
     Button,
     Col
-} from "react-bootstrap/lib/"
+} from "react-bootstrap"
 
 const login = (props) => {
 
     function FieldGroup({ id, label, help, ...props }) {
         return (
             <FormGroup controlId={id}>
-                <ControlLabel>{label}</ControlLabel>
-                <FormControl {...props} onChange={props.change} />
-                {help && <HelpBlock>{help}</HelpBlock>}
+                <div>{label}</div>
+                <ListGroup {...props} onChange={props.change} />
+                {help && <Tab>{help}</Tab>}
             </FormGroup>
         )
     }
@@ -23,8 +22,8 @@ const login = (props) => {
         <Col md={2} />
         <Col md={8}>
             <form>
-                <FieldGroup id="formControlsEmail" type="text" label="Email" inputRef={(ref) => { this.email = ref }} />
-                <FieldGroup id="formControlsPassword" type="password" label="Password" inputRef={(ref) => { this.password = ref }} />
+                <FieldGroup id="listGroupsEmail" type="text" label="Email" inputRef={(ref) => { this.email = ref }} />
+                <FieldGroup id="listGroupsPassword" type="password" label="Password" inputRef={(ref) => { this.password = ref }} />
                 <Button type="button" bsStyle="success" onClick={() => {
                     props.login(this.email.value, this.password.value)
                 }}>

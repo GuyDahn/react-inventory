@@ -1,58 +1,58 @@
-import * as actionTypes from '../actions/actions'
-import updateObject from '../utility'
+// import * as actionTypes from '../actions/actions'
+// import updateObject from '../utility'
 
-const initialState = {
-    token: null,
-    userID: null,
-    error: null,
-    loading: false,
-    products: null
-}
+// const initialState = {
+//     token: null,
+//     userID: null,
+//     error: null,
+//     loading: false,
+//     products: null
+// }
 
-const authStart = (state, action) => {
-    return updateObject(state, {
-        error: null,
-        loading: true
-    })
-}
+// const authStart = (state, action) => {
+//     return updateObject(state, {
+//         error: null,
+//         loading: true
+//     })
+// }
 
-const authSuccess = (state, action) => {
-    return updateObject(state, {
-        token: action.token,
-        error: null,
-        loading: false
-    })
-}
+// const authSuccess = (state, action) => {
+//     return updateObject(state, {
+//         token: action.token,
+//         error: null,
+//         loading: false
+//     })
+// }
 
-const authFail = (state, action) => {
-    return updateObject(state, {
-        error: action.error,
-        loading: false
-    })
-}
+// const authFail = (state, action) => {
+//     return updateObject(state, {
+//         error: action.error,
+//         loading: false
+//     })
+// }
 
-const authLogout = (state, action) => {
-    return updateObject(state, { token: null })
-}
+// const authLogout = (state, action) => {
+//     return updateObject(state, { token: null })
+// }
 
-const loadProducts = (state, action) => {
-    return updateObject(state, { products: updateProducts })
-}
+// const loadProducts = (state, action) => {
+//     return updateObject(state, { products: updateProducts })
+// }
 
-const updateProducts = (state, action) => {
-    let updatedProducts = state.products.concat(action.product)
-    return updateObject(state, { products: updatedProducts })
-}
+// const updateProducts = (state, action) => {
+//     let updatedProducts = state.products.concat(action.product)
+//     return updateObject(state, { products: updatedProducts })
+// }
 
-const reducer = (state = initialState, action) => {
-    switch (action.type) {
-        case actionTypes.AUTH_START: return authStart(state, action)
-        case actionTypes.AUTH_SUCCESS: return authSuccess(state, action)
-        case actionTypes.AUTH_FAIL: return authFail(state, action)
-        case actionTypes.AUTH_LOGOUT: return authLogout(state, action)
-        case actionTypes.AUTH_PRODUCTS: return loadProducts(state, action)
-        case actionTypes.UPDATE_PRODUCTS: return updateProducts(state, action)
-    }
-}
+// const reducer = (state = initialState, action) => {
+//     switch (action.type) {
+//         case actionTypes.AUTH_START: return authStart(state, action)
+//         case actionTypes.AUTH_SUCCESS: return authSuccess(state, action)
+//         case actionTypes.AUTH_FAIL: return authFail(state, action)
+//         case actionTypes.AUTH_LOGOUT: return authLogout(state, action)
+//         case actionTypes.AUTH_PRODUCTS: return loadProducts(state, action)
+//         case actionTypes.UPDATE_PRODUCTS: return updateProducts(state, action)
+//     }
+// }
 
-export default reducer
+// export default reducer

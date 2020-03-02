@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Navbar, Nav, NavItem, Modal, Button, Table } from 'react-bootstrap/lib/'
+import { Navbar, Nav, NavItem, Modal, Button, Table } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import * as actionTypes from '../../store/actions/actions'
 
@@ -18,11 +18,8 @@ class Navigation extends Component {
         this.setState({ showCart: false })
     }
 
-    removeFromCart = (productID) => {
-        //TBC
-    }
-
     render() {
+        const reducer = (accumulator, currentValue) => accumulator + currentValue
         return <div>
             <Navbar collapseOnSelect>
                 <Navbar.Header>
@@ -38,60 +35,58 @@ class Navigation extends Component {
                                 Cart ({this.props.cart.length})
                         </NavItem>
                             :
-                            <NavItem eventKey={2}
-                                onClick={this.props.login}>
+                            <NavItem eventKey={2} onClick={this.props.login}>
                                 Login
                         </NavItem>}
                         {this.props.isAuthed ?
-                            <NavItem eventKey={3}
-                                onClick={this.props.logout}>
+                            <NavItem eventKey={3} onClick={this.props.logout}>
                                 Logout
                         </NavItem>
                             :
-                            <NavItem eventKey={3}
-                                onClick={this.props.createAccount}>
+                            <NavItem eventKey={3} onClick={this.props.createAccount}>
                                 Create Account
                         </NavItem>}
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
             {this.state.showCart ?
-                <div className="static">
+                <div className="static-modal">
                     <Modal.Dialog style={{ overflowY: 'initial' }}>
-                        <Modal.Header>Your Cart</Modal.Header>
-                        <Modal.Body style={{
-                            textAlign: 'left',
-                            overflowY: 'auto',
-                            height: 500
-                        }}>
-                            <Table striped bordered condensed hover>
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Product Name</th>
-                                        <th>Price</th>
-                                        <th>Remove From Cart</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {this.props.cart.map((item, index) => {
-                                        return <tr key={index}>
-                                            <td>{index + 1}</td>
-                                            <td>{item.product_name}</td>
-                                            <td>{item.price}</td>
-                                            <td style={{ textAlign: 'center' }}>
-                                                <Button
-                                                    bsSize="small"
-                                                    bsStyle="danger"
-                                                    onClick={() => {
-                                                        console.log("Delete " + item)
-                                                        this.props.removeFromCart(index)
-                                                        // this.props.onDeleteProduct(item.id, index)
-                                                    }}>Remove</Button></td>
+                        <Modal.Header>
+                            <Modal.Title>Your Cart</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body style={{ textAlign: 'left', overflowY: 'auto', height: 500 }}>
+                            {this.props.cart.length === 0 ? <h2>No products in cart.</h2> :
+                                <Table striped bordered condensed hover>
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Product Name</th>
+                                            <th>Price</th>
+                                            <th>Remove From Cart</th>
                                         </tr>
-                                    })}
-                                </tbody>
-                            </Table>
+                                    </thead>
+                                    <tbody>
+
+                                        {this.props.cart.map((item, index) => {
+                                            return <tr key={index}>
+                                                <td>{index + 1}</td>
+                                                <td>{item.product_name}</td>
+                                                <td>${item.price}</td>
+                                                <td style={{ textAlign: 'center' }}><Button bsSize="small" bsStyle="danger" onClick={() => {
+                                                    console.log("Delete " + item)
+                                                    this.props.removeFromCart(index)
+                                                }}>Remove</Button></td>
+                                            </tr>
+                                        })}
+                                        <tr>
+                                            <td></td>
+                                            <td><strong>Total:</strong></td>
+                                            <td><strong>${this.props.cart.map(item => item.price).reduce(reducer).toFixed(2)}</strong></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </Table>}
                         </Modal.Body>
                         <Modal.Footer>
                             <Button onClick={this.hideCart}>Close</Button>
@@ -101,6 +96,7 @@ class Navigation extends Component {
                 </div>
                 : null}
         </div>
+
     }
 }
 

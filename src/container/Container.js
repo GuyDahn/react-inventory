@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Button, ButtonToolbar } from 'react-bootstrap/lib/'
+import { Button, ButtonToolbar } from 'react-bootstrap'
 // import * as actionTypes from '../store/actions/actions'
-import LoginContainer from './LoginContainer/LoginContainer'
+import LoginContainer from './Login/LoginContainer'
 import CreateAccountContainer from './CreateAccount/CreateAccountContainer'
-import SellProductButtons from './SellProduct/SellProductsContainer'
+import SellProductButtons from './SellProduct/SellProductContainer'
 import AddToStockButtons from './AddToStock/AddToStockContainer'
 import Inventory from './Inventory/Inventory'
 import CreateProduct from './CreateProduct/CreateProduct'
@@ -62,20 +62,16 @@ class Container extends Component {
                 {this.props.isAuthed ?
                     <div>
                         <ButtonToolbar style={{ justifyContent: "center", display: "flex" }}>
-                            <Button bsStyle="primary" bsSize="large"
-                                onClick={this.showSellProducts}>
+                            <Button bsStyle="primary" bsSize="large" onClick={this.showSellProducts}>
                                 Sell Products
                         </Button>
-                            <Button bsStyle="danger" bsSize="large"
-                                onClick={this.showAddToStock}>
+                            <Button bsStyle="danger" bsSize="large" onClick={this.showAddToStock}>
                                 Add to Stock
                         </Button>
-                            <Button bsStyle="info" bsSize="large"
-                                onClick={this.showInventory}>
+                            <Button bsStyle="info" bsSize="large" onClick={this.showInventory}>
                                 View Inventory
                         </Button>
-                            <Button bsStyle="success" bsSize="large"
-                                onClick={this.showCreateProduct}>
+                            <Button bsStyle="success" bsSize="large" onClick={this.showCreateProduct}>
                                 Create New Product
                         </Button>
                         </ButtonToolbar>

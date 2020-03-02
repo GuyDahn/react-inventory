@@ -1,12 +1,23 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ProductButton from '../../components/AddToStock/AddToStockButtons'
-import { ButtonToolbar } from 'react-bootstrap/lib/'
+import {
+    ButtonToolbar,
+    Modal,
+    Button,
+    FormGroup,
+    ListGroup
+} from 'react-bootstrap'
+import * as actionTypes from '../../store/actions/actions'
 // import axios from 'axios'
 
 class AddToStockButtons extends Component {
+
     state = {
-        cart: []
+        cart: [],
+        showModal: false,
+        updatedProduct: null,
+        updatedProductID: null
     }
 
     addToCart = (product) => {
@@ -17,16 +28,22 @@ class AddToStockButtons extends Component {
 
     render() {
         const products = this.props.products.map(product => {
-            return <ProductButton
-                key={product.id}
-                name={product_name}
-                quantity={product_quantity}
-                click={() => this.addToCart(product.product_name)}
-            />
+            return <ProductButton key={product.id} name={product.product_name} quantity={product.quantity} click={() => this.setState({ showModal: true, updatedProduct: product.product_name, updatedProductID: product.id })} />
         })
+
+        function FieldGroup({ id, label, help, ...props }) {
+            return (
+                <FormGroup controlId={id}>
+                    <div>{label}</div>
+                    <ListGroup {...props} onChange={props.change} />
+                    {help && <div>{help}</div>}
+                </FormGroup>
+            )
+        }
 
         return (
             <div style={{ margin: 10 }} >
+                <br /> <br />
                 <ButtonToolbar style={{ justifyContent: "center", display: "flex" }}>
                     {products.slice(0, 4)}
                 </ButtonToolbar>
@@ -57,6 +74,34 @@ class AddToStockButtons extends Component {
                 <ButtonToolbar style={{ justifyContent: "center", display: "flex" }}>
                     {products.slice(36, 40)}
                 </ButtonToolbar>
+                {this.state.showModal ?
+                    <div className="static-modal">
+                        <Modal.Dialog style={{ overflowY: 'initial' }}>
+                            <Modal.Header>
+                                <Modal.Title>Your Cart</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body style={{ textAlign: 'left', overflowY: 'auto', height: 500 }}>
+                                <h4>Update quantity of {this.state.updatedProduct}</h4>
+                                <FieldGroup
+                                    id="ListGroupsPrice"
+                                    type="text" label="Quantity"
+                                    inputRef={(ref) => { this.quantity = ref }} />
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button onClick={() => this.setState({ showModal: false })}>
+                                    Close
+                                </Button>
+                                <Button bsStyle="success" onClick={() => {
+                                    this.props.updateQuantity(
+                                        this.state.updatedProduct,
+                                        this.state.updatedProductID,
+                                        this.quantity.value)
+                                    this.setState({ showModal: false })
+                                }}>Update Quantity</Button>
+                            </Modal.Footer>
+                        </Modal.Dialog>
+                    </div>
+                    : null}
             </div>
         )
     }
@@ -68,4 +113,11 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(AddToStockButtons)
+const mapDispatchToProps = dispatch => {
+    return {
+        incrementQuantity: (productID, quantity) => dispatch(actionTypes.incrementQuantity(productID, quantity)),
+        updateQuantity: (product_name, productID, quantity) => dispatch(actionTypes.updateQuantity(product_name, productID, quantity))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddToStockButtons)

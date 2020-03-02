@@ -1,26 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ProductButton from '../../components/SellProducts/SellProductButtons'
-import { ButtonToolbar } from 'react-bootstrap/lib/'
+import { ButtonToolbar } from 'react-bootstrap'
 import * as actionTypes from '../../store/actions/actions'
 // import axios from 'axios'
 
 class ProductButtons extends Component {
 
-    state = {
-        cart: []
-    }
-
-    // addToCart = (product) => {
-    //     let newArr = this.state.cart.concat(product)
-    //     this.setState({ cart: newArr })
-    //     console.log(this.state.cart)
-    // }
-
     render() {
-        const products = this.props.products.map(product, index => {
-            return <ProductButton key={product.id} name={product.product_name} quantity={product.quantity}
-                click={() => this.props.onAddToCart({
+        const products = this.props.products.map((product, index) => {
+            return <ProductButton key={product.id} name={product.product_name} quantity={product.quantity} click={() =>
+                this.props.onAddToCart({
                     id: product.id,
                     index: index,
                     product_name: product.product_name,
@@ -30,6 +20,7 @@ class ProductButtons extends Component {
 
         return (
             <div style={{ margin: 10 }} >
+                <br /><br />
                 <ButtonToolbar style={{ justifyContent: "center", display: "flex" }}>
                     {products.slice(0, 4)}
                 </ButtonToolbar>
