@@ -77,41 +77,41 @@ class Container extends Component {
     }
 
     render() {
-        return ( 
+        return (
             <div className='container'>
                 {this.props.showLogin ? <LoginContainer /> : null}
                 {this.props.showCreateAccount ? <CreateAccountContainer /> : null}
                 {this.props.isAuthed ?
-                <div>
-                    <ButtonToolbar style={{ justifyContent: "center", display: "flex" }}>
-                        <Button bsStyle="primary" bsSize="large" onClick={this.showSellProducts}>
-                            Sell Products
-                        </Button>
-                        <Button bsStyle="danger" bsSize="large" onClick={this.showAddToStock}>
-                            Add to Stock
-                        </Button>
-                        <Button bsStyle="info" bsSize="large" onClick={this.showInventory}>
-                            View Inventory
-                        </Button>
-                        <Button bsStyle="success" bsSize="large" onClick={this.showCreateProduct}>
-                            Create New Product
-                        </Button>
-                        <Button bsStyle="warning" bsSize="large" onClick={this.showOrders}>
-                            Order History
-                        </Button>
-                    </ButtonToolbar>
-                    {this.props.showContainers ? 
                     <div>
-                        {this.state.showSellProducts ? <SellProductButtons /> : null}
-                        {this.state.showAddToStock ? <AddToStockButtons /> : null}
-                        {this.state.showInventory ? <Inventory /> : null}
-                        {this.state.showCreateProduct ? <CreateProduct /> : null}
-                        {this.state.showOrders ? <Orders /> : null}
+                        <ButtonToolbar style={{ justifyContent: "center", display: "flex" }}>
+                            <Button bsStyle="primary" bsSize="large" onClick={this.showSellProducts}>
+                                Sell Products
+                        </Button>
+                            <Button bsStyle="danger" bsSize="large" onClick={this.showAddToStock}>
+                                Add to Stock
+                        </Button>
+                            <Button bsStyle="info" bsSize="large" onClick={this.showInventory}>
+                                View Inventory
+                        </Button>
+                            <Button bsStyle="success" bsSize="large" onClick={this.showCreateProduct}>
+                                Create New Product
+                        </Button>
+                            <Button bsStyle="warning" bsSize="large" onClick={this.showOrders}>
+                                Order History
+                        </Button>
+                        </ButtonToolbar>
+                        {this.props.showContainers ?
+                            <div>
+                                {this.state.showSellProducts ? <SellProductButtons /> : null}
+                                {this.state.showAddToStock ? <AddToStockButtons /> : null}
+                                {this.state.showInventory ? <Inventory /> : null}
+                                {this.state.showCreateProduct ? <CreateProduct /> : null}
+                                {this.state.showOrders ? <Orders /> : null}
+                            </div>
+                            : null}
+                        {this.props.showChart ? <Chart /> : null}
                     </div>
                     : null}
-                    {this.props.showChart ? <Chart /> : null}
-                </div>
-                : null}
             </div>
         )
     }

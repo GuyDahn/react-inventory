@@ -92,9 +92,8 @@ class Navigation extends Component {
                         <Navbar.Brand>
                             <a>Inventory Manager</a>
                         </Navbar.Brand>
-                        <Navbar.Toggle />
                     </Navbar.Header>
-                    <Navbar.Collapse>
+                    <Navbar>
                         <Nav pullRight>
                             {this.props.isAuthed ? 
                                 <NavItem eventKey={1} onClick={this.props.showChart}>
@@ -118,7 +117,7 @@ class Navigation extends Component {
                                     Create Account
                                 </NavItem>}
                         </Nav>
-                    </Navbar.Collapse>
+                    </Navbar>
                 </Navbar>
                 {this.state.showCart ? 
                     <div className="static-modal">
