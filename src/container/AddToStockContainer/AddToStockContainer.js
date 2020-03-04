@@ -9,7 +9,7 @@ import {
     ControlLabel, 
     HelpBlock,
     FormControl
- } from 'react-bootstrap/lib/'
+ } from 'react-bootstrap'
 import * as actionTypes from '../../store/actions'
 import axios from 'axios'
 import Refresh from 'react-icons/lib/md/autorenew'
